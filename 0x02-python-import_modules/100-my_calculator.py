@@ -1,24 +1,21 @@
 #!/usr/bin/python3
-
+from sys import argv, exit
+from calculator_1 import add, sub, mul, div
 if __name__ == "__main__":
-    from sys import argv
-    if len(argv) != 4:
+    argc = len(argv)
+    if (argc != 4):
         print("Usage: ./100-my_calculator.py <a> <operator> <b>")
-        quit(1)
-    
+        exit(1)
+    i = 0
     a = int(argv[1])
     b = int(argv[3])
-    
-    all_ops = ["+", "-", "*", "/"]
-    
-    from calculator_1 import add, sub, mul, div
-    
-    funcs = [add, sub, mul, div]
-    
-    for i, s in enumerate(all_ops):
-        if argv[2] == s:
-            print("{} {} {} = {}".format(a, s, b, funcs[i](a, b)))
+    operators = [('+', add), ('-', sub), ('*', mul), ('/', div)]
+    while (i <= 3):
+        op = operators[i][0]
+        if argv[2] == op:
+            print("{} {} {} = {}".format(a, argv[2], b, operators[i][1](a, b)))
             break
-    else:
-        print("Unknown operator. Available operators: +, -, * and /")
-        quit(1)
+        i += 1
+        if (i == 4):
+            print("Unknown operator. Available operators: +, -, * and /")
+            exit(1)
